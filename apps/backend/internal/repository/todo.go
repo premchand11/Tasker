@@ -630,7 +630,7 @@ func (r *TodoRepository) UploadTodoAttachment(
 		"todo_id":      todoID,
 		"name":         fileName,
 		"uploaded_by":  userID,
-		// "download_key": s3Key,
+		"download_key": s3Key,
 		"file_size":    fileSize,
 		"mime_type":    mimeType,
 	})

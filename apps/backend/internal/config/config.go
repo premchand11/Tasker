@@ -20,7 +20,7 @@ type Config struct {
 	Integration   IntegrationConfig    `koanf:"integration" validate:"required"`
 	Observability *ObservabilityConfig `koanf:"observability"`
 	AWS           AWSConfig            `koanf:"aws" validate:"required"`
-	// Cron          *CronConfig          `koanf:"cron"`
+	Cron          *CronConfig          `koanf:"cron"`
 }
 
 type Primary struct {
@@ -68,21 +68,21 @@ type AWSConfig struct {
 	EndpointURL     string `koanf:"endpoint_url"`
 }
 
-// type CronConfig struct {
-// 	ArchiveDaysThreshold        int `koanf:"archive_days_threshold"`
-// 	BatchSize                   int `koanf:"batch_size"`
-// 	ReminderHours               int `koanf:"reminder_hours"`
-// 	MaxTodosPerUserNotification int `koanf:"max_todos_per_user_notification"`
-// }
+type CronConfig struct {
+	ArchiveDaysThreshold        int `koanf:"archive_days_threshold"`
+	BatchSize                   int `koanf:"batch_size"`
+	ReminderHours               int `koanf:"reminder_hours"`
+	MaxTodosPerUserNotification int `koanf:"max_todos_per_user_notification"`
+}
 
-// func DefaultCronConfig() *CronConfig {
-// 	return &CronConfig{
-// 		ArchiveDaysThreshold:        30,
-// 		BatchSize:                   100,
-// 		ReminderHours:               24,
-// 		MaxTodosPerUserNotification: 10,
-// 	}
-// }
+func DefaultCronConfig() *CronConfig {
+	return &CronConfig{
+		ArchiveDaysThreshold:        30,
+		BatchSize:                   100,
+		ReminderHours:               24,
+		MaxTodosPerUserNotification: 10,
+	}
+}
 
 func parseMapString(value string) (map[string]string, bool) {
 	if !strings.HasPrefix(value, "map[") || !strings.HasSuffix(value, "]") {
@@ -215,9 +215,9 @@ func LoadConfig() (*Config, error) {
 		logger.Fatal().Err(err).Msg("invalid observability config")
 	}
 
-	// if mainConfig.Cron == nil {
-	// 	mainConfig.Cron = DefaultCronConfig()
-	// }
+	if mainConfig.Cron == nil {
+		mainConfig.Cron = DefaultCronConfig()
+	}
 
 	return mainConfig, nil
 }

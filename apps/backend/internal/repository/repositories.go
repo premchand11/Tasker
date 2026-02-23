@@ -10,10 +10,8 @@ type Repositories struct {
 
 func NewRepositories(s *server.Server) *Repositories {
 	return &Repositories{
-		Todo: NewTodoRepository(s),
-		Comment:NewCommentRepository(s),
+		Todo:     NewTodoRepository(s),
+		Comment:  NewCommentRepository(s),
 		Category: NewCategoryRepository(s),
-
-
 	}
 }
