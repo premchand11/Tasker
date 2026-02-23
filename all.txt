@@ -1,0 +1,10 @@
+techstack:
+1.echo
+2.pgx driver-postgres(wint be using orms)
+3.zero log (long years )
+4.validator-playground
+5.koanf-config mgmt(altrenative to viper)
+6.tern-migration db library same creator of pgx
+5.testify- for tests(unit test)
+6.test-containers(useful for integarion test against db) on top of docker
+
